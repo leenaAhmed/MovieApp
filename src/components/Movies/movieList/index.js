@@ -6,38 +6,34 @@ function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    console.log(currentPage);
+  const selectedPage = (page) => {
     InstancsAxios.get(
       `/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${currentPage}`
     )
       .then((res) => {
         setMovies(res.data.results);
+        console.log(res.data.page);
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    selectedPage(1);
   }, []);
 
   const handelPrevious = () => {
-    if (currentPage >= 0) {
-      setCurrentPage({
-        ...currentPage,
-        currentPage: 1,
-      });
+    if (currentPage <= 0) {
+      setCurrentPage(currentPage);
     } else {
-      setCurrentPage({
-        ...currentPage,
-        currentPage: currentPage - 1,
-      });
-      console.log(currentPage);
+      setCurrentPage(currentPage - 1);
+      selectedPage(currentPage - 1);
     }
-
     console.log(currentPage);
   };
   const handelNext = () => {
-    setCurrentPage({
-      ...currentPage,
-      currentPage: currentPage + 1,
-    });
+    setCurrentPage(currentPage + 1);
+    selectedPage(currentPage + 1);
+
     console.log(currentPage);
   };
   return (
