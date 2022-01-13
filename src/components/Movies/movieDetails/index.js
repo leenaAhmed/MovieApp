@@ -8,7 +8,7 @@ function MoviesDetails() {
   const params = useParams();
   useEffect(() => {
     axiosInstance
-      .get(`/${params.id}?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`)
+      .get(`movie/${params.id}?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`)
       .then((res) => {
         setMovie(res.data);
       })

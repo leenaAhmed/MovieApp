@@ -5,14 +5,15 @@ import InstancsAxios from "../../services/axios";
 function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [serchitems, setSearch] = useState("");
 
   const selectedPage = (page) => {
     InstancsAxios.get(
-      `/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${currentPage}`
+      `movie/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${currentPage}`
     )
       .then((res) => {
         setMovies(res.data.results);
-        console.log(res.data.page);
+        console.log(res);
       })
       .catch((err) => console.log(err));
   };
@@ -20,6 +21,17 @@ function MoviesList() {
   useEffect(() => {
     selectedPage(1);
   }, []);
+
+  useEffect(() => {
+    InstancsAxios.get(
+      `search/movie?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&query=${serchitems}`
+    )
+      .then((res) => {
+        setMovies(res.data.results);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, [serchitems]);
 
   const handelPrevious = () => {
     if (currentPage <= 0) {
@@ -40,6 +52,16 @@ function MoviesList() {
     <>
       <div className="container">
         <h4 className="text-center my-4">MoviesList</h4>
+        <form className="d-flex">
+          <input
+            type="text"
+            className="form-control me-2"
+            placeholder="Search"
+            aria-label="Search"
+            value={serchitems}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </form>
         <div className="row">
           {movies.map((movie) => {
             return (

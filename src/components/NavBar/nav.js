@@ -3,9 +3,6 @@ import InstancsAxios from "../services/axios";
 
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const [serchitems, setSearch] = useState("");
-  const [movies, setMovies] = useState([]);
-
   // const handleFetch = () => {
   //   InstancsAxios.get(`/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`, {
   //     params: {
@@ -19,18 +16,18 @@ const Navbar = () => {
   //     .catch((err) => console.log(err));
   // };
 
-  useEffect(() => {
-    InstancsAxios.get(`/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`, {
-      params: {
-        query: serchitems,
-      },
-    })
-      .then((res) => {
-        setMovies(res.data.results);
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, [serchitems]);
+  // useEffect(() => {
+  //   InstancsAxios.get(`/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`, {
+  //     params: {
+  //       query: serchitems,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       setMovies(res.data.results);
+  //       console.log(res);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [serchitems]);
 
   return (
     <>
@@ -60,17 +57,6 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
-              <input
-                type="text"
-                className="form-control me-2"
-                placeholder="Search"
-                aria-label="Search"
-                value={serchitems}
-                onChange={(event) => setSearch(event.target.value)}
-              />
-              <button className="btn btn-outline-success">Search</button>
-            </form>
           </div>
         </div>
       </nav>
