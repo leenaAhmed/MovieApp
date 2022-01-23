@@ -1,31 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axiosInstance from "../../services/axios";
+// import axiosInstance from "../../services/axios";
 import CardDetials from "../moveCardDeials/index";
+import { useSelector, useDispatch } from "react-redux";
+import changeMoviesDetails from "./../../../store/action/moviesDetails";
 
 function MoviesDetails() {
-  const [movie, setMovie] = useState({});
   const params = useParams();
+  const loader = useSelector((state) => state.loader.loader);
+  const movie = useSelector((state) => state.MoviesDetails);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    axiosInstance
-      .get(`movie/${params.id}?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`)
-      .then((res) => {
-        setMovie(res.data);
-      })
-      .catch((err) => console.log(err));
+    dispatch(changeMoviesDetails(params.id));
   }, []);
 
   return (
-    <div className=" moveCard">
-      <CardDetials
-        title={movie.original_title}
-        id={movie.id}
-        overview={movie.overview}
-        release_date={movie.release_date}
-        vote_average={movie.vote_average}
-        tagline={movie.status}
-        srcImge={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-      />
+    <div className="">
+      {loader === true ? (
+        <div className="moveCard">
+          <div className="text-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="moveCard">
+          <CardDetials
+            title={movie.original_title}
+            id={movie.id}
+            overview={movie.overview}
+            release_date={movie.release_date}
+            vote_average={movie.vote_average}
+            tagline={movie.status}
+            srcImge={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          />
+        </div>
+      )}
     </div>
   );
 }

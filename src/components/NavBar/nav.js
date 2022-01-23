@@ -1,37 +1,10 @@
-import React, { useState, useEffect } from "react";
-import InstancsAxios from "../services/axios";
-
+import React from "react";
+import FavMovieIcon from "./favNavIcon";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  // const handleFetch = () => {
-  //   InstancsAxios.get(`/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`, {
-  //     params: {
-  //       query: serchitems,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       setMovies(res.data.results);
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   InstancsAxios.get(`/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0`, {
-  //     params: {
-  //       query: serchitems,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       setMovies(res.data.results);
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [serchitems]);
-
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg   naveStyle fixed-top">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -56,7 +29,15 @@ const Navbar = () => {
                   Favorite Movies
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link ">
+                  About Us
+                </Link>
+              </li>
             </ul>
+          </div>
+          <div className="me-4">
+            <FavMovieIcon />
           </div>
         </div>
       </nav>

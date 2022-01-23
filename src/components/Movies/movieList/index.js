@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 import Card from "../moveCard/card";
+import Favicon from "../../icon/favicon";
+import { useSelector, useDispatch } from "react-redux";
+
 import InstancsAxios from "../../services/axios";
+import "./style.css";
 function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [serchitems, setSearch] = useState("");
+  const loader = useSelector((state) => state.loader.loader);
 
   const selectedPage = (page) => {
     InstancsAxios.get(
-      `movie/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${currentPage}`
+      `movie/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${page}`
     )
       .then((res) => {
         setMovies(res.data.results);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   };
@@ -28,13 +32,12 @@ function MoviesList() {
     )
       .then((res) => {
         setMovies(res.data.results);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, [serchitems]);
 
   const handelPrevious = () => {
-    if (currentPage <= 0) {
+    if (currentPage === 0) {
       setCurrentPage(currentPage);
     } else {
       setCurrentPage(currentPage - 1);
@@ -45,9 +48,10 @@ function MoviesList() {
   const handelNext = () => {
     setCurrentPage(currentPage + 1);
     selectedPage(currentPage + 1);
-
     console.log(currentPage);
   };
+  const FavoriteMovies = useSelector((state) => state.Favorite.Favorite);
+  console.log(FavoriteMovies);
   return (
     <>
       <div className="container">
@@ -63,6 +67,13 @@ function MoviesList() {
           />
         </form>
         <div className="row">
+          {loader && (
+            <div className="text-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
           {movies.map((movie) => {
             return (
               <div key={movie.id} className="col-lg-3 mt-4">
@@ -70,6 +81,7 @@ function MoviesList() {
                   title={movie.original_title}
                   id={movie.id}
                   srcImge={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  icon={<Favicon id={movie.id} />}
                 />
               </div>
             );
@@ -77,13 +89,13 @@ function MoviesList() {
         </div>
         <div className="d-flex justify-content-between mt-5 mb-5">
           <button
-            className="btn btn-primary bt-lg"
+            className="btn butnpages bt-lg"
             onClick={() => handelPrevious()}
           >
-            Previouse
+            page {currentPage}
           </button>
-          <button className="btn btn-primary" onClick={() => handelNext()}>
-            Next
+          <button className="btn butnpages" onClick={() => handelNext()}>
+            page {currentPage + 1}
           </button>
         </div>
       </div>

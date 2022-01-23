@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import "./style.css";
 function Card(props) {
   return (
@@ -9,10 +8,11 @@ function Card(props) {
         <Link to={`/movies-details/${props.id}`}>
           <img src={props.srcImge} className="card-img-top" alt={props.title} />
         </Link>
-        <div className="card-body">
+         <div className="card-body d-flex justify-content-between">
           <Link to={`/movies-details/${props.id}`} className="card-text">
             {props.title}
           </Link>
+          {props.icon}
         </div>
       </div>
     </div>
