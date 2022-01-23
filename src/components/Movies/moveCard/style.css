@@ -4,3 +4,11 @@
 .card-text {
   text-decoration: none;
 }
+
+.starIcon {
+  position: relative;
+  top: -247px;
+  right: -10px;
+  font-size: 25px;
+  text-decoration: none;
+ }

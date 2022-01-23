@@ -1,5 +1,7 @@
 import React from "react";
 import FavMovieIcon from "./favNavIcon";
+import "./style.css";
+
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
@@ -37,8 +39,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="me-4">
-            <FavMovieIcon />
-          </div>
+           </div>
         </div>
       </nav>
     </>

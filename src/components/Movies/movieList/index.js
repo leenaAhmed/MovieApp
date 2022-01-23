@@ -80,6 +80,7 @@ function MoviesList() {
                 <Card
                   title={movie.original_title}
                   id={movie.id}
+                  rate={movie.vote_average}
                   srcImge={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   icon={<Favicon id={movie.id} />}
                 />

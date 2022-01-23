@@ -7,7 +7,7 @@ export default function addToFavoriteMovies(data) {
 
 export function removeFavoriteMovies(data) {
   return {
-    type: " REMOVE_FAVORITE",
+    type: "REMOVE_FAVORITE",
     payload: data,
   };
 }
