@@ -40,14 +40,14 @@ const Icon = (props) => {
           dispatch(addToFavoriteMovies(res.data));
           setIconColor("text-danger");
         }
-        console.log(FavoriteMovies);
-        console.log(res.data);
+        // console.log(FavoriteMovies);
+        // console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
 
   const icons = {
-    fontSize: "23px",
+    fontSize: "23px"
   };
   return (
     <FontAwesomeIcon

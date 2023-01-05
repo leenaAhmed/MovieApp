@@ -4,68 +4,40 @@ import Card from "../moveCard/card";
 import Favicon from "../../icon/favicon";
 import { useSelector, useDispatch } from "react-redux";
 
-import InstancsAxios from "../../services/axios";
+import getMoviesList from "./../../../store/action/movieList";
 import "./style.css";
 function MoviesList() {
-  const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [serchitems, setSearch] = useState("");
   const loader = useSelector((state) => state.loader.loader);
+  const { movies } = useSelector((state) => state.MoviesList);
 
+  const dispatch = useDispatch();
+  console.log(useSelector((state) => state.MoviesList));
   const selectedPage = (page) => {
-    InstancsAxios.get(
-      `movie/popular?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&page=${page}`
-    )
-      .then((res) => {
-        setMovies(res.data.results);
-      })
-      .catch((err) => console.log(err));
+    dispatch(getMoviesList(page));
   };
 
   useEffect(() => {
-    selectedPage(1);
-  }, []);
-
-  useEffect(() => {
-    InstancsAxios.get(
-      `search/movie?api_key=6354f454eb60c40b4787fe8e3cb0fbf0&query=${serchitems}`
-    )
-      .then((res) => {
-        setMovies(res.data.results);
-      })
-      .catch((err) => console.log(err));
-  }, [serchitems]);
+    selectedPage(currentPage);
+  }, [currentPage]);
 
   const handelPrevious = () => {
     if (currentPage === 0) {
       setCurrentPage(currentPage);
     } else {
       setCurrentPage(currentPage - 1);
-      selectedPage(currentPage - 1);
     }
-    console.log(currentPage);
+    // console.log(currentPage);
   };
   const handelNext = () => {
     setCurrentPage(currentPage + 1);
-    selectedPage(currentPage + 1);
-    console.log(currentPage);
+    // console.log(currentPage);
   };
-  const FavoriteMovies = useSelector((state) => state.Favorite.Favorite);
-  console.log(FavoriteMovies);
   return (
     <>
       <div className="container">
         <h4 className="text-center my-4">MoviesList</h4>
-        <form className="d-flex">
-          <input
-            type="text"
-            className="form-control me-2"
-            placeholder="Search"
-            aria-label="Search"
-            value={serchitems}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </form>
+
         <div className="row">
           {loader && (
             <div className="text-center">
@@ -76,7 +48,7 @@ function MoviesList() {
           )}
           {movies.map((movie) => {
             return (
-              <div key={movie.id} className="col-lg-3 mt-4">
+              <div key={movie.id} className="col-lg-3 col-md-6 col-sm-6 mt-4">
                 <Card
                   title={movie.original_title}
                   id={movie.id}

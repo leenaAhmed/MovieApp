@@ -11,13 +11,13 @@ function FavoritdMovies() {
   const dispatch = useDispatch();
 
   const removeMovie = (movieId) => {
-    console.log("Delete", dispatch(removeFavoriteMovies(movieId)));
+    // console.log("Delete", dispatch(removeFavoriteMovies(movieId)));
 
     dispatch(changeIconColor("text-gray"));
   };
   return (
     <div className="container mt-3">
-      <div className="row mt-5" >
+      <div className="row mt-5">
         <h2 className="mt-5 text-center"> My Favorite Movies</h2>
 
         {Favorite.map((movie) => {

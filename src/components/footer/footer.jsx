@@ -9,7 +9,7 @@ export default class Footer extends Component {
           style={{
             background:
               "linear-gradient(to right bottom, #a9c9ff 0%, #ffbbec 100%)",
-            color: " #9ab7eb;",
+            color: " #9ab7eb"
           }}
         >
           <div className="container">

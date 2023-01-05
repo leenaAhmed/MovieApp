@@ -1,13 +1,6 @@
-#cart-icon i {
-  font-size: 24px;
-  color: #000;
-}
+ 
 .naveStyle {
   background: linear-gradient(to right bottom, #a9c9ff 0%, #ffbbec 100%);
   color: #9ab7eb;
 }
-#cart-icon span {
-  position: absolute;
-  top: 24px;
-  right: 19px;
-}
+ 

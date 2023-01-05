@@ -3,7 +3,7 @@ import { languageContext } from "../context/index";
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 const About = (props) => {
-  console.log(props);
+  // console.log(props);
 
   const history = useHistory();
   const { lang, setLang } = useContext(languageContext);
