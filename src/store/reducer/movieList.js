@@ -9,6 +9,10 @@ export default function moviesListReducer(state = initialState, action) {
       return {
         movies: action.payload
       };
+    case "SET_MOVIES_LIST":
+      return {
+        movies: action.payload
+      };
     case "SEARCH_MOVIE":
       return {
         text: action.payload
@@ -19,4 +23,4 @@ export default function moviesListReducer(state = initialState, action) {
   }
 }
 
-console.log(initialState);
+// console.log(initialState);

@@ -17,7 +17,7 @@ function App() {
         <LanguageProvider value={{ lang, setLang }}>
           <Navbar />
           <Switch>
-            <Route path="/" exact component={Movies} />
+            <Route path="/MovieApp" exact component={Movies} />
             <Route path="/FavoriteMovies" exact component={FavoritdMovies} />
 
             <Route path="/movies-details/:id" exact component={MoviesDetails} />
